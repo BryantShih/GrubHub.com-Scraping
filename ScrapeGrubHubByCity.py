@@ -19,11 +19,12 @@ except:
 
 if(__name__ == '__main__'):
 
-    city = sys.argv[1] #'HARTFORD'
+    city = sys.argv[1] #string as parameter   ex. 'HARTFORD'
     #load city-zip code dictionary
     with open('City2ZipCode.pkl', 'rb') as fg:
         city2zipCodes = pickle.load(fg)
 
+    #get zip codes list stored in pickle file alrady.
     if(not city.upper() in city2zipCodes):
         print city + 'is not in our options, please use another city as input'
     #list the #od zip codes for each city
@@ -36,7 +37,7 @@ if(__name__ == '__main__'):
         print '--Scraping data for zip code ' + zipCode + ' ...'
         chromeDriverObj = openChromePage(zipCode)
         url = chromeDriverObj.getUrl()
-        url = url.replace('&facet=open_now:true', '')
+        url = url.replace('&facet=open_now:true', '') #delete the condition to get all restaurant data no matter it open or not now.
         #print 'url: ' + url
         #get url for delivery category
         delUrl = url.replace('pickup', 'delivery')
